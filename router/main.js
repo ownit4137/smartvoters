@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function (app, conn) {
   app.get("/", function (req, res) {
     res.render("index.html");
   });
@@ -7,7 +7,6 @@ module.exports = function (app) {
     res.render("about.html");
   });
 
-  /*
   app.get("/getCode", function (req, res) {
     var stmt = "SELECT * FROM election_code;";
 
@@ -19,5 +18,4 @@ module.exports = function (app) {
       }
     });
   });
-  */
 };
