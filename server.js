@@ -5,13 +5,14 @@ var app = express();
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 var conn = mysql.createConnection({
   host: "34.64.72.201",
   user: "root",
   password: "root",
   database: "election",
+  multipleStatements: true,
   dialectOptions: {
     options: {
       rerquestTimeout: 3000,

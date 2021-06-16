@@ -1,9 +1,89 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Main</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script>
+      function sidebar_open() {
+        document.getElementById("sidebar-layout").style.display = "block";
+      }
+
+      function sidebar_close() {
+        document.getElementById("sidebar-layout").style.display = "none";
+      }
+    </script>
   </head>
+
   <body>
-    Hey, this is index page
+    <div id="layout">
+      <!-- Sidebar -->
+      <div id="sidebar-layout" style="display: none" id="sidebar" class="sidebar-animate-left">
+        <button onclick="sidebar_close()" class="button">닫기</button>
+        <div>
+          <div class="sidebar title">내 투표소 찾기</div>
+          <div>
+            <div>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">1</td>
+                  <td class="second cell"><a href="/PollPlace">내 투표소 찾기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">2</td>
+                  <td class="second cell"><a href="/CandInfo">후보자 정보 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">3</td>
+                  <td class="second cell"><a href="/CandProm">후보자 공약 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">4</td>
+                  <td class="second cell"><a href="/Member">국회의원 찾기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">5</td>
+                  <td class="second cell"><a href="/PrevElec">이전 선거 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div>
+        <div id="body-content">
+          <div id="upper">
+            <div id="sidebar-button">
+              <button class="button"
+                style="font-size: 15pt"
+                onclick="sidebar_open()">
+                ☰
+              </button>
+            </div>
+            <div id="maintitle">
+              <span class="firstchar">알</span>아두면<br>
+              <span class="firstchar">쓸</span>모있는<br>
+              <span class="firstchar">선</span>거&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+              <span class="firstchar">잡</span>학지식<br>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
   </body>
 </html>
