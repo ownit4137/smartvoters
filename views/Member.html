@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script>
+      function sidebar_open() {
+        document.getElementById("sidebar-layout").style.display = "block";
+      }
+
+      function sidebar_close() {
+        document.getElementById("sidebar-layout").style.display = "none";
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="layout">
+      <!-- Sidebar -->
+      <div id="sidebar-layout" style="display: none" id="sidebar" class="sidebar-animate-left">
+        <button onclick="sidebar_close()" class="button">닫기</button>
+        <div>
+          <div class="sidebar title">국회의원 찾기</div>
+          <div>
+            <div>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">1</td>
+                  <td class="second cell"><a href="./PollPlace">내 투표소 찾기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">2</td>
+                  <td class="second cell"><a href="./CandInfo">후보자 정보 보기</a><br /></td>
+                  <td class="cell"></td>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">3</td>
+                  <td class="second cell"><a href="./CandProm">후보자 공약 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">4</td>
+                  <td class="second cell"><a href="./Member">국회의원 찾기</a><br /></td>
+                  <td class="cell"><img src="./src/stamp.png" alt="" style="width:28px;object-fit:cover"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">5</td>
+                  <td class="second cell"><a href="./PrevElec">이전 선거 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div>
+        <div id="body-content">
+          <div id="upper">
+            <div id="sidebar-button">
+              <button class="button"
+                style="font-size: 15pt"
+                onclick="sidebar_open()">
+                ☰
+              </button>
+            </div>
+            <div class="title">국회의원 찾기</div>
+          </div>
+          <hr />
+          <div id="content">
+            <div id="search-layout">
+              <form action="PollPlace_do" method="GET" accept-charset="utf-8">
+                
+                <input type="text" name="name" class="inputarea" placeholder="후보자 이름">
+                <input type="text" name="partyName" class="inputarea" placeholder="정당명">
+                <input type="submit" value="     " class="inputarea search-button">
+              </form>
+            </div>
+            
+            <div id="search-result">
+              <table>
+                <tr>
+                  <td>일단 나오는 정보 다 td로 때려박아 주삼</td>
+                </tr>
+              </table>
+
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

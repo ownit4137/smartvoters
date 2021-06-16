@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>About</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <% if(candidate.length > 0) {%> 
+      <% for(var i=0; i < candidate.length; i++) {%>
+          <% 
+          var name = candidate[0].name;
+          var giho = candidate[0].giho;
+          var birthday = candidate[0].birthday.substring(0,10);
+          var status = candidate[0].status == 0 ? '등록' : candidate[0].status == 2 ? '사퇴' : '등록무효 또는 사망';
+          var job = candidate[0].job;
+          var partyName = candidate[0].partyName;
+          var sdName = candidate[0].sdName;
+          var sggName = candidate[0].sggName;
+          var wiwName = candidate[0].wiwName;
+          var gender = candidate[0].gender == 1 ? '여성' : '남성';
+        %> 
+        <%= giho %> 
+        <%= name %> 
+        <%= gender %> 
+        <%= job %> 
+        <%= birthday %> 
+        <%= partyName %> 
+        <%= sdName %> 
+        <%= wiwName %> 
+        <%= sggName %>
+        <%= status %> 
+        <br>
+      <% } %> 
+    <% } %>
+  </body>
+</html>

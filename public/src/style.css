@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "MaruBuri-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:hover {
+  color: #000 !important;
+  background-color: #ccc !important;
+}
+
+body {
+  font-family: "MaruBuri-Regular";
+}
+input:focus {outline:none;}
+
+td {
+  border: 1px solid #444444;
+}
+
+#sidebar-layout {
+  height: 650px;
+  width: 400px;
+  background-color: #fff;
+  position: fixed !important;
+  z-index: 1;
+  overflow: auto;
+  background-image: url("sidebar_bgd.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#body-content {
+  text-align: center;
+}
+#layout {
+  margin: 5% 5% 5% 5%;
+  height: 100%;
+}
+.button {
+  border: none;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: center;
+  white-space: nowrap;
+  appearance: none;
+  margin: 5px;
+}
+
+#sidebar-button {
+  position: fixed;
+  font-size: 15pt;
+}
+.sidebar-animate-left {
+  position: relative;
+  animation: animateleft 0.4s;
+}
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 5.4%;
+    opacity: 1;
+  }
+}
+
+
+#upper {
+  height: 150px;
+}
+
+.button:hover {
+  color: #000 !important;
+  background-color: #ccc !important;
+}
+.title {
+  font-size: 30pt;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+#content {
+  padding-top: 30px;
+  height: 700px;
+}
+.sidebar {
+  text-align: center;
+}
+
+.linktable {
+  margin: auto;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+}
+.cell {
+  padding: 10px 20px 10px 20px;
+  font-size: 15pt;
+  border: 2px solid #444444;
+}
+.second {
+  width: 200px;
+}
+#search-layout {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+}
+.inputarea{
+  color:#3c3c3c;
+  font-family: "MaruBuri-Regular";
+  font-size: 15pt;
+  background-color: #ffffff;
+  padding: 7px;
+  margin: 0px 30px 0px 30px;
+  border: 2px solid #444444;
+  display:inline;
+}
+
+.search-button{
+  background-image: url("search.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border:none;
+}
+
+#maintitle{
+  font-size: 20pt;
+  padding-top: 6em;
+}
+
+.firstchar{
+  font-size: 50pt;
+}

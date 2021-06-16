@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script>
+      function sidebar_open() {
+        document.getElementById("sidebar-layout").style.display = "block";
+      }
+
+      function sidebar_close() {
+        document.getElementById("sidebar-layout").style.display = "none";
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="layout">
+      <!-- Sidebar -->
+      <div id="sidebar-layout" style="display: none" id="sidebar" class="sidebar-animate-left">
+        <button onclick="sidebar_close()" class="button">닫기</button>
+        <div>
+          <div class="sidebar title">내 투표소 찾기</div>
+          <div>
+            <div>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">1</td>
+                  <td class="second cell"><a href="./PollPlace">내 투표소 찾기</a><br /></td>
+                  <td class="cell"> <img src="./src/stamp.png" alt="" style="width:28px;object-fit:cover"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">2</td>
+                  <td class="second cell"><a href="./CandInfo">후보자 정보 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">3</td>
+                  <td class="second cell"><a href="./CandProm">후보자 공약 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">4</td>
+                  <td class="second cell"><a href="./Member">국회의원 찾기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+              <table class="linktable">
+                <tr>
+                  <td class="cell">5</td>
+                  <td class="second cell"><a href="./PrevElec">이전 선거 보기</a><br /></td>
+                  <td class="cell"></td>
+                </tr>
+              </table><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div>
+        <div id="body-content">
+          <div id="upper">
+            <div id="sidebar-button">
+              <button class="button"
+                style="font-size: 15pt"
+                onclick="sidebar_open()">
+                ☰
+              </button>
+            </div>
+            <div class="title">내 투표소 찾기</div>
+          </div>
+          <hr />
+          <div id="content">
+            <div id="search-layout">
+              <form action="/PollPlace_do" method="GET" accept-charset="utf-8">
+                <select name="date">
+                  <option value="" selected disabled hidden>선택해주세요</option>
+                  <% for(var i=0; i < codes.length; i++) {%>
+                    <%
+                      var data = codes[i].sgId;
+                      var year = parseInt(data/10000);
+                      var month = parseInt((data%10000)/100);
+                      var day = (data%10000)%100
+                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
+                    %> 
+                    <option name='date' value="<%=data%>"><%=date%></option>
+                  <% } %>  
+                </select>
+                <input type="text" name="elecplace" class="inputarea" placeholder="선거구명">
+                
+                <input type="radio" name="pollinfo" value="pre" checked>
+                <label for="pre">사전투표</label>
+                <input type="radio" name="pollinfo" value="main">
+                <label for="main">본투표</label>
+                
+                <input type="submit" value="     " class="inputarea search-button">
+              </form>
+            </div>
+
+           
+            <%if(typeof(pollList) !== "undefined") {%>
+              <div id="search-result">
+                <% if(pollList.length > 0) {%>
+                  <table>
+                    <% for(var i=0; i < pollList.length; i++) {%> 
+                    <%
+  
+                      var data = pollList[i];
+                      var sdName = data.sdName;
+                      var wiwName = data.wiwName;
+                      var emdName = data.emdName;
+                      var place = data.placeName;
+                      var floor = data.floor;
+                      var address = data.address;
+  
+                      var year = parseInt(data.sgId/10000);
+                      var month = parseInt((data.sgId%10000)/100);
+                      var day = (data.sgId%10000)%100
+                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
+  
+                      var pollPlace = sdName+' '+wiwName+' '+emdName+' '+place+' '+floor;
+                    %> 
+                    <tr>
+                      <td><%=date%></td>
+                      <td>
+                        <%if(pollType == 'pre') { %>
+                          <%= data.evPsName %> 
+                        <% }else { %>
+                          <%= data.PsName %> 
+                        <% } %>  
+                      </td>
+                      <td><%=pollPlace%></td>
+                      <td><%=address%></td>
+                    </tr>
+                    <% } %> 
+                  </table>
+                <% }else { %>
+                  <div>검색결과가 없습니다.</div>
+                <% } %>   
+  
+              </div>
+            <% } %>  
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
