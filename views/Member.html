@@ -13,6 +13,8 @@
         document.getElementById("sidebar-layout").style.display = "none";
       }
     </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="./src/readmore.min.js"></script>
   </head>
 
   <body>
@@ -89,7 +91,12 @@
             <% if(typeof(memberList) !== "undefined") {%> 
               <% if(memberList.length > 0) {%> 
                 <div id="search-result">
-                  <table>
+                  <table id="search-table">
+                    <tr>
+                      <th>사진</th>
+                      <th>정보</th>
+                      <th>약력</th>
+                    </tr>
                     <% for(var i=0; i < memberList.length; i++) {%> 
                     <%
                       var data = memberList[i];
@@ -106,15 +113,23 @@
                       var age = data.age;
                     %> 
                     <tr>
-                      <td><img src="<%=imageLink%>"></td>
-                      <td><%= name %></td>
-                      <td><%= age %></td>
-                      <td><%= sggName %></td>
-                      <td><%= partyName %> </td>
-                      <td><%- memTitle %></td>
+                      <td><img style="width: 10em" src="<%=imageLink%>"></td>
+                      <td><%= name %>(<%= age %>)<br><%= sggName %><br><%= partyName %></td>
+                      <td class="memtitle"><%- memTitle %></td>
                     </tr>
                     <% } %> 
                   </table>
+
+                  <script>
+                    $(function () { 
+                      $('.memtitle').readmore({ 
+                        blockCSS: 'display: block; width: 50em; padding:1em 0em 1em 0em', 
+                        collapsedHeight: 150, 
+                        moreLink: '<a href="#" class="more">더보기</a>', 
+                        lessLink: '<a href="#" class="more">닫기</a>' 
+                      }); 
+                    });
+                  </script>
                 </div>
               <% }else { %> 
                 <div>검색결과가 없습니다.</div>

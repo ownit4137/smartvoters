@@ -5,6 +5,7 @@
     "jsdom": "^16.6.0",
     "mocha-jsdom": "^2.0.0",
     "mysql": "^2.18.1",
+    "readmore-js": "^2.2.1",
     "sequelize": "^6.6.2",
     "supervisor": "^0.12.0"
   },
