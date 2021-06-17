@@ -78,7 +78,7 @@
           <hr />
           <div id="content">
             <div id="search-layout">
-              <form action="PollPlace_do" method="GET" accept-charset="utf-8">
+              <form action="Member_do" method="GET" accept-charset="utf-8">
                 
                 <input type="text" name="name" class="inputarea" placeholder="후보자 이름">
                 <input type="text" name="partyName" class="inputarea" placeholder="정당명">
@@ -86,14 +86,35 @@
               </form>
             </div>
             
-            <div id="search-result">
-              <table>
-                <tr>
-                  <td>일단 나오는 정보 다 td로 때려박아 주삼</td>
-                </tr>
-              </table>
-
-            </div>
+            <% if(typeof(memberList) !== "undefined") {%> 
+              <% if(memberList.length > 0) {%> 
+                <div id="search-result">
+                  <table>
+                    <% for(var i=0; i < memberList.length; i++) {%> 
+                    <%
+                      var data = memberList[i];
+                      var name = data.name;
+                      var imageLink = data.imageLink;
+                      var sggName = data.sggName;
+                      var memTitle = data.memTitle;
+                      var partyName = data.partyName;
+                      var age = data.age;
+                    %> 
+                    <tr>
+                      <td><img src="<%=imageLink%>"></td>
+                      <td><%= name %></td>
+                      <td><%= age %></td>
+                      <td><%= sggName %></td>
+                      <td><%= partyName %> </td>
+                      <td><%= memTitle %></td>
+                    </tr>
+                    <% } %> 
+                  </table>
+                </div>
+              <% }else { %> 
+                <div>검색결과가 없습니다.</div>
+              <% } %> 
+            <% } %> 
             
           </div>
         </div>

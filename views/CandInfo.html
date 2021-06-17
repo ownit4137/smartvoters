@@ -13,6 +13,24 @@
         document.getElementById("sidebar-layout").style.display = "none";
       }
     </script>
+    <% 
+      getAge = function(birthday) {
+        var today = new Date();
+        var currYear = today.getFullYear();
+        var currMonth = (today.getMonth() + 1);
+        var currDay = today.getDate();
+
+        if (month < 10) month = '0'+currMonth;
+        if (day < 10) day = '0'+currDay;
+
+        var monthDay = currMonth + currDay;
+        var birthdayy = birthday.substr(0, 4);
+        var birthdaymd = birthday.substr(4, 4);
+        var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
+
+        return age;
+      }
+    %> 
   </head>
 
   <body>
@@ -79,27 +97,71 @@
           <hr />
           <div id="content">
             <div id="search-layout">
-              <form action="PollPlace_do" method="GET" accept-charset="utf-8">
-                <input type="text" name="date" class="inputarea" placeholder="선거일자">
+              <form action="CandInfo_do" method="GET" accept-charset="utf-8">
+                <select name="date">
+                  <option value="" selected disabled hidden>선택해주세요</option>
+                  <% for(var i=0; i < codes.length; i++) {%>
+                    <%
+                      var data = codes[i].sgId;
+                      var year = parseInt(data/10000);
+                      var month = parseInt((data%10000)/100);
+                      var day = (data%10000)%100
+                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
+                    %> 
+                    <option name='date' value="<%=data%>"><%=date%></option>
+                  <% } %>  
+                </select>
                 <input type="text" name="elecplace" class="inputarea" placeholder="선거구명">
                 <input type="text" name="name" class="inputarea" placeholder="후보자 이름">
                 <input type="submit" value="     " class="inputarea search-button">
               </form>
             </div>
             
-            <div id="search-result">
-              <table>
-                <tr>
-                  <td>sgID</td>
-                  <td>sgTypecode</td>
-                  <td>sdName + wiwName + sggName</td>
-                  <td>giho + partyName + name</td>
-                  <td>job</td>
-                  <td>gender + partyName -> age</td>
-                </tr>
-              </table>
+            <% if (typeof(candList) !== "undefined") {%> 
+              <% if (candList.length > 0) {%> 
+                <div id="search-result">
+                  <table>
+                    <% for(var i=0; i < candList.length; i++) {%> 
+                    <%
+                      var data = candList[i];
+                      var sggName = data.sggName;
+                      var sdName = data.sdName;
+                      var wiwName = data.wiwName;
+                      var place = sdName + ' ' + wiwName + ' '+sggName;
+                      var giho = data.giho;
+                      var partyName = data.partyName;
+                      var name = data.name;
+                      var gender = data.gender == 0 ? '남' : '여';
+                      var address = data.address;
+                      var job = data.job;
+                      var status = data.status == 0 ? '등록' : data.status == 1 ? '등록무효 또는 사망' : '사퇴';
+                      var birthday = data.birthday.substring(0, 10).replace('-','').replace('-','');
+                      var age = getAge(birthday);
 
-            </div>
+                      var year = parseInt(data.sgId/10000);
+                      var month = parseInt((data.sgId%10000)/100);
+                      var day = (data.sgId%10000)%100
+                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
+                    %> 
+                    <tr>
+                      <td><%= date %> </td>
+                      <td><%= giho %></td>
+                      <td><%= name %></td>
+                      <td><%= gender %> </td>
+                      <td><%= partyName %> </td>
+                      <td><%= age %>세</td>
+                      <td><%= place %></td>
+                      <td><%= job %> </td>
+                      <td><%= address %> </td>
+                      <td><%= status %> </td>
+                    </tr>
+                    <% } %> 
+                  </table>
+                </div>
+              <% }else { %>
+                <div>검색결과가 없습니다.</div>
+              <% } %>  
+            <% } %> 
             
           </div>
         </div>
