@@ -73,6 +73,10 @@ module.exports = function (app, conn) {
     var sggName = req.query.elecplace
     var name = req.query.name;
 
+    if (sgId === undefined) {
+      sgId = '';
+    }
+
     var sql = 'SELECT DISTINCT sgId FROM election_code; '
     var sql1 = "SELECT * FROM candidate WHERE sgId LIKE '%"+sgId+"%' AND sggName LIKE '%"+sggName+"%' AND name LIKE '%"+name+"%' ORDER BY giho ASC; ";
 

@@ -90,12 +90,11 @@
                     %> 
                     <tr>
                     <% if(codes[i].sgTypecode == 0) { %> 
-                      <th><a href="https://search.naver.com/search.naver?query=<%=sgName%>" target='_blank'><%=sgName%></a></th>
+                      <th id='electionTitle' colspan="2" onclick="window.open('https://search.naver.com/search.naver?query=<%=sgName%>','','')"><%=sgName%></th>
                     <%} else { %>
-                      
-                        <td><%=year%>년 <%=month%>월 <%=day%>일</td>
-                        <td><%=sgName%></td>
-                      </tr>
+                        <td id='info'><%=year%>년 <%=month%>월 <%=day%>일</td>
+                        <td id='info'><%=sgName%></td>
+                    </tr>
                     <%}%> 
                   <%}%>
                 </tr>
