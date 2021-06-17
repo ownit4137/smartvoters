@@ -120,7 +120,26 @@
             <% if (typeof(candList) !== "undefined") {%> 
               <% if (candList.length > 0) {%> 
                 <div id="search-result">
-                  <table>
+                    <%
+                        var data = candList[0];
+                        
+                        var year = parseInt(data.sgId/10000);
+                        var month = parseInt((data.sgId%10000)/100);
+                        var day = (data.sgId%10000)%100
+                        var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
+                      %>
+                  <div id="search-comment"><%=date%> 선거의 해당 후보자</div>
+                  <table id="search-table">
+                    <tr>
+                      <th id="td-5em">기호</th>
+                      <th id="td-5em">이름</th>
+                      <th id="td-10em">정당</th>
+                      <th id="td-5em">성별/나이</th>
+                      <th>선거구</th>
+                      <th>직업</th>
+                      <th>주소</th>
+                      <th id="td-5em">등록여부</th>
+                    </tr>
                     <% for(var i=0; i < candList.length; i++) {%> 
                     <%
                       var data = candList[i];
@@ -137,19 +156,12 @@
                       var status = data.status == 0 ? '등록' : data.status == 1 ? '등록무효 또는 사망' : '사퇴';
                       var birthday = data.birthday.substring(0, 10).replace('-','').replace('-','');
                       var age = getAge(birthday);
-
-                      var year = parseInt(data.sgId/10000);
-                      var month = parseInt((data.sgId%10000)/100);
-                      var day = (data.sgId%10000)%100
-                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
                     %> 
                     <tr>
-                      <td><%= date %> </td>
-                      <td><%= giho %></td>
+                      <td>기호 <%= giho %>번</td>
                       <td><%= name %></td>
-                      <td><%= gender %> </td>
                       <td><%= partyName %> </td>
-                      <td><%= age %>세</td>
+                      <td><%= gender %>,&nbsp;<%= age %>세</td>
                       <td><%= place %></td>
                       <td><%= job %> </td>
                       <td><%= address %> </td>

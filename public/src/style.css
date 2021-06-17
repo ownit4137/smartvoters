@@ -17,10 +17,28 @@ a:hover {
 body {
   font-family: "MaruBuri-Regular";
 }
-input:focus {outline:none;}
+input:focus {
+  outline: none;
+}
+
+th {
+  padding:1em;
+}
 
 td {
-  border: 1px solid #444444;
+  padding:1em;
+}
+
+select {
+  appearance: none;
+  font-family: "MaruBuri-Regular";
+  font-size: 13pt;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 0px 30px 0px 30px;
+  border: 2px solid #444444;
+  display: inline;
+  outline: none;
 }
 
 #sidebar-layout {
@@ -74,7 +92,6 @@ td {
   }
 }
 
-
 #upper {
   height: 150px;
 }
@@ -112,31 +129,44 @@ td {
 #search-layout {
   padding-top: 30px;
   padding-bottom: 30px;
-
 }
-.inputarea{
-  color:#3c3c3c;
+.inputarea {
+  color: #3c3c3c;
   font-family: "MaruBuri-Regular";
   font-size: 15pt;
   background-color: #ffffff;
   padding: 7px;
   margin: 0px 30px 0px 30px;
   border: 2px solid #444444;
-  display:inline;
+  display: inline;
 }
 
-.search-button{
+.search-button {
   background-image: url("search.png");
   background-size: 100%;
   background-repeat: no-repeat;
-  border:none;
+  border: none;
 }
 
-#maintitle{
+#maintitle {
   font-size: 20pt;
   padding-top: 6em;
 }
 
-.firstchar{
+.firstchar {
   font-size: 50pt;
+}
+
+#search-comment{
+  font-size: 20pt;
+  padding: 1em;
+}
+#search-table{
+  margin: auto;
+}
+#td-5em{
+  width: 5em;
+}
+#td-10em{
+  width:10em;
 }

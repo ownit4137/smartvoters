@@ -80,6 +80,11 @@
           <div id="content">
             <div id="search-layout">
               <form action="/PollPlace_do" method="GET" accept-charset="utf-8">
+                <input type="radio" name="pollinfo" value="pre" checked>
+                <label for="pre">사전투표</label>
+                <input type="radio" name="pollinfo" value="main">
+                <label for="main">본투표</label>
+
                 <select name="date">
                   <option value="" selected disabled hidden>선택해주세요</option>
                   <% for(var i=0; i < codes.length; i++) {%>
@@ -94,12 +99,7 @@
                   <% } %>  
                 </select>
                 <input type="text" name="elecplace" class="inputarea" placeholder="선거구명">
-                
-                <input type="radio" name="pollinfo" value="pre" checked>
-                <label for="pre">사전투표</label>
-                <input type="radio" name="pollinfo" value="main">
-                <label for="main">본투표</label>
-                
+              
                 <input type="submit" value="     " class="inputarea search-button">
               </form>
             </div>
@@ -108,10 +108,23 @@
             <%if(typeof(pollList) !== "undefined") {%>
               <div id="search-result">
                 <% if(pollList.length > 0) {%>
-                  <table>
+                  <%
+                      var data = pollList[0];
+                      
+                      var year = parseInt(data.sgId/10000);
+                      var month = parseInt((data.sgId%10000)/100);
+                      var day = (data.sgId%10000)%100
+                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
+                    %>
+                  <div id="search-comment"><%=date%> 선거의 해당 투표소</div>
+                  <table id="search-table">
+                    <tr>
+                      <th>투표소명</th>
+                      <th>장소명</th>
+                      <th>주소</th>
+                    </tr>
                     <% for(var i=0; i < pollList.length; i++) {%> 
                     <%
-  
                       var data = pollList[i];
                       var sdName = data.sdName;
                       var wiwName = data.wiwName;
@@ -119,16 +132,9 @@
                       var place = data.placeName;
                       var floor = data.floor;
                       var address = data.address;
-  
-                      var year = parseInt(data.sgId/10000);
-                      var month = parseInt((data.sgId%10000)/100);
-                      var day = (data.sgId%10000)%100
-                      var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
-  
                       var pollPlace = sdName+' '+wiwName+' '+emdName+' '+place+' '+floor;
                     %> 
                     <tr>
-                      <td><%=date%></td>
                       <td>
                         <%if(pollType == 'pre') { %>
                           <%= data.evPsName %> 
