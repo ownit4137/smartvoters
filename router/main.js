@@ -125,7 +125,6 @@ module.exports = function (app, conn) {
       if (err) {
         console.log(err);
       }else {
-        console.log(sql);
         var resultArray = Object.values(JSON.parse(JSON.stringify(result)));
 
         res.render("Member.html", { memberList : resultArray })

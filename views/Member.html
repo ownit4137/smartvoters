@@ -96,7 +96,12 @@
                       var name = data.name;
                       var imageLink = data.imageLink;
                       var sggName = data.sggName;
-                      var memTitle = data.memTitle;
+                      var memTtitle = data.memTitle;
+
+                      if (data.memTitle != null) {
+                        memTitle = data.memTitle.replace(/\n/gi, "<br>").replace(/ /gi, "&nbsp"); 
+                      }
+                      
                       var partyName = data.partyName;
                       var age = data.age;
                     %> 
@@ -106,7 +111,7 @@
                       <td><%= age %></td>
                       <td><%= sggName %></td>
                       <td><%= partyName %> </td>
-                      <td><%= memTitle %></td>
+                      <td><%- memTitle %></td>
                     </tr>
                     <% } %> 
                   </table>

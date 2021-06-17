@@ -165,7 +165,13 @@
                       <td><%= place %></td>
                       <td><%= job %> </td>
                       <td><%= address %> </td>
-                      <td><%= status %> </td>
+                      <td>
+                        <%if (status != '등록') {%> 
+                          <span style="color:red"><%= status %> </span>
+                        <% }else{ %> 
+                          <%= status %> 
+                        <% } %> 
+                      </td>
                     </tr>
                     <% } %> 
                   </table>
