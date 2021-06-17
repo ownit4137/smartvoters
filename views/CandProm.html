@@ -78,7 +78,7 @@
           <hr />
           <div id="content">
             <div id="search-layout">
-              <form action="PollPlace_do" method="GET" accept-charset="utf-8">
+              <form action="CandProm_do" method="GET" accept-charset="utf-8">
                 
                 <input type="text" name="name" class="inputarea" placeholder="후보자 이름">
                 <input type="text" name="partyName" class="inputarea" placeholder="정당명">
@@ -86,17 +86,33 @@
               </form>
             </div>
             
+            <% if(typeof(promiseList) !== "undefined") {%> 
             <div id="search-result">
+              <% if (promiseList.length > 0) {%> 
               <table>
+                <% for(var i=0; i < promiseList.length; i++) {%> 
+                <%
+                  var data = promiseList[i];
+                  var name = data.name;
+                  var giho = data.giho;
+                  var partyName = data.partyName;
+                  var prmTitle = data.prmTitle;
+                  var prmCont = data.prmCont.replace(/ /gi, "&nbsp").replace(/\n/gi, "<br>");
+                %> 
                 <tr>
-                  <td>candName</td>
-                  <td>prmTitle</td>
-                  <td>prmCont</td>
-                  <td>상의필요</td>
+                  <td><%=giho%></td>
+                  <td><%=name%></td>
+                  <td><%=partyName%></td>
+                  <td><%= prmTitle %> </td>
+                  <td style="text-align: left;"><%-prmCont%></td>
                 </tr>
+                <% } %> 
               </table>
-
+              <% }else { %>
+                <div>검색결과가 없습니다.</div>
+              <% } %>  
             </div>
+            <% } %> 
             
           </div>
         </div>

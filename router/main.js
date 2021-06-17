@@ -25,7 +25,7 @@ module.exports = function (app, conn) {
     var stmt = "SELECT DISTINCT sgId FROM election_code; ";
 
     if (pollType == 'pre') {
-      var sql = "SELECT * FROM pre_polls WHERE sgId="+sgId+" AND evPsName LIKE '%"+sggName+"%'; ";
+      var sql = "SELECT * FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND evPsName LIKE '%"+sggName+"%'; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
@@ -38,7 +38,7 @@ module.exports = function (app, conn) {
         }
       })
     }else {
-      var sql = "SELECT * FROM main_polls WHERE sgId="+sgId+" AND PsName LIKE '%"+sggName+"%'; ";
+      var sql = "SELECT * FROM main_polls WHERE sgId LIKE '%"+sgId+"%' AND PsName LIKE '%"+sggName+"%'; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
@@ -74,7 +74,7 @@ module.exports = function (app, conn) {
     var name = req.query.name;
 
     var sql = 'SELECT DISTINCT sgId FROM election_code; '
-    var sql1 = "SELECT * FROM candidate WHERE sgId="+sgId+" AND sggName LIKE '%"+sggName+"%' AND name LIKE '%"+name+"%' ORDER BY giho ASC; ";
+    var sql1 = "SELECT * FROM candidate WHERE sgId LIKE '%"+sgId+"%' AND sggName LIKE '%"+sggName+"%' AND name LIKE '%"+name+"%' ORDER BY giho ASC; ";
 
     conn.query(sql + sql1, function (err, result) {
       if (err) {
@@ -92,6 +92,23 @@ module.exports = function (app, conn) {
   app.get("/CandProm", function (req, res) {
     res.render("CandProm.html");
   });
+
+  app.get("/CandProm_do", function (req, res) {
+    var name = req.query.name;
+    var partyName = req.query.partyName;
+
+    var sql = "SELECT * FROM promise JOIN candidate ON promise.cnddtId=candidate.cnddtId WHERE candidate.name LIKE '%"+name+"%' AND candidate.partyName LIKE '%"+partyName+"%'; ";
+
+    conn.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      }else {
+        var resultArray = Object.values(JSON.parse(JSON.stringify(result)));
+
+        res.render("CandProm.html", {promiseList: resultArray})
+      }
+    })
+  })
 
   // Politician Member API
   app.get("/Member", function (req, res) {
