@@ -138,7 +138,7 @@ module.exports = function (app, conn) {
 
   // Previous Election API
   app.get("/PrevElec", function (req, res) {
-    var stmt = "SELECT * FROM election_code;";
+    var stmt = "SELECT * FROM election_code ORDER BY sgId DESC, sgTypecode;";
 
     conn.query(stmt, function (err, result) {
       if (err) {
