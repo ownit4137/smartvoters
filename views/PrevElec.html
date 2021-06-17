@@ -78,7 +78,7 @@
           <hr />
           <div id="content">
             <div id="search-result">
-              <table>
+              <table id="search-table">
                 <tr>
                   <% for(var i=0; i < codes.length; i++) {%> 
                     <% 
@@ -90,7 +90,7 @@
                     %> 
                     <tr>
                     <% if(codes[i].sgTypecode == 0) { %> 
-                      <th><%=sgName%></th>
+                      <th><a href="https://search.naver.com/search.naver?query=<%=sgName%>" target='_blank'><%=sgName%></a></th>
                     <%} else { %>
                       
                         <td><%=year%>년 <%=month%>월 <%=day%>일</td>
