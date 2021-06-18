@@ -23,17 +23,13 @@ module.exports = function (app, conn) {
     var sggName = req.query.elecplace;
     var pollType = req.query.pollinfo;
     var stmt = "SELECT DISTINCT sgId FROM election_code; ";
-    var sql = "";
 
     if (sgId === undefined) {
       sgId = '';
-      sql = "SELECT DISTINCT sdName, wiwName, emdName, placeName, address, floor";
-    }else {
-      sql = "SELECT * FROM ";
     }
 
     if (pollType == 'pre') {
-      sql = sql + ", evPsName FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY evPsName * 1 ASC; ";
+      var sql = "SELECT * FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY evPsName * 1; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
@@ -46,7 +42,7 @@ module.exports = function (app, conn) {
         }
       })
     }else {
-      sql = sql + ",PsName FROM main_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY PsName * 1 ASC; ";
+      var sql = "SELECT * FROM main_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY PsName * 1; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
