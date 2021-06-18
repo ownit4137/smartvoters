@@ -24,6 +24,10 @@ module.exports = function (app, conn) {
     var pollType = req.query.pollinfo;
     var stmt = "SELECT DISTINCT sgId FROM election_code; ";
 
+    if (sgId === undefined) {
+      sgId = '';
+    }
+
     if (pollType == 'pre') {
       var sql = "SELECT * FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND evPsName LIKE '%"+sggName+"%'; ";
 
