@@ -27,13 +27,13 @@ module.exports = function (app, conn) {
 
     if (sgId === undefined) {
       sgId = '';
-      sql = "SELECT DISTINCT sdName, wiwName, emdName, evPsName, placeName, address, floor FROM ";
+      sql = "SELECT DISTINCT sdName, wiwName, emdName, placeName, address, floor";
     }else {
       sql = "SELECT * FROM ";
     }
 
     if (pollType == 'pre') {
-      sql = sql + "pre_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY evPsName * 1; ";
+      sql = sql + ", evPsName FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY evPsName * 1; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
@@ -46,7 +46,7 @@ module.exports = function (app, conn) {
         }
       })
     }else {
-      sql = sql + "main_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY PsName * 1; ";
+      sql = sql + ",PsName FROM main_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY PsName * 1; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
