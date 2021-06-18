@@ -13,6 +13,8 @@
         document.getElementById("sidebar-layout").style.display = "none";
       }
     </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="./src/readmore.min.js"></script>
   </head>
 
   <body>
@@ -20,6 +22,7 @@
       <!-- Sidebar -->
       <div id="sidebar-layout" style="display: none" id="sidebar" class="sidebar-animate-left">
         <button onclick="sidebar_close()" class="button">닫기</button>
+        <a href="./" class="button" style="float: right;">Home</a>
         <div>
           <div class="sidebar title">후보자 공약 보기</div>
           <div>
@@ -89,25 +92,43 @@
             <% if(typeof(promiseList) !== "undefined") {%> 
             <div id="search-result">
               <% if (promiseList.length > 0) {%> 
-              <table>
-                <% for(var i=0; i < promiseList.length; i++) {%> 
+              <table id="search-table">
+                <% 
+                  var distname = "";
+                  for(var i=0; i < promiseList.length; i++) {
+                %> 
+              
                 <%
                   var data = promiseList[i];
                   var name = data.name;
                   var giho = data.giho;
                   var partyName = data.partyName;
                   var prmTitle = data.prmTitle;
-                  var prmCont = data.prmCont.replace(/ /gi, "&nbsp").replace(/\n/gi, "<br>");
-                %> 
+                  var prmCont = data.prmCont.replace(/ /gi, "&nbsp").replace(/\n/gi, "<br>").replace(/□/g, '📰').replace(/○/g, '◾');
+
+                  if (name !== distname) {
+                    distname = name;
+                %>
                 <tr>
-                  <td id="td-5em"><%=giho%></td>
-                  <td id="td-5em"><%=name%></td>
-                  <td id="td-5em"><%=partyName%></td>
-                  <td><%= prmTitle %> </td>
-                  <td style="text-align: left;"><%-prmCont%></td>
+                  <th id="prommem" colspan="2">기호&nbsp;<%=giho%>번&nbsp;<%=partyName%>&nbsp;<%=name%>&nbsp;후보의&nbsp;공약</th>
+                </tr>
+                <% }%>
+                <tr>
+                  <th><%= prmTitle %> </th>
+                  <td class="prmcont" style="text-align: left;"><%-prmCont%></td>
                 </tr>
                 <% } %> 
               </table>
+              <script>
+                $(function () { 
+                  $('.prmcont').readmore({ 
+                    blockCSS: 'display: block; width: 50em; padding:1em 0em 1em 0em', 
+                    collapsedHeight: 150, 
+                    moreLink: '<a href="#" class="more">더보기</a>', 
+                    lessLink: '<a href="#" class="more">닫기</a>' 
+                  }); 
+                });
+              </script>
               <% }else { %>
                 <div>검색결과가 없습니다.</div>
               <% } %>  
