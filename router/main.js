@@ -29,7 +29,7 @@ module.exports = function (app, conn) {
     }
 
     if (pollType == 'pre') {
-      var sql = "SELECT * FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND evPsName LIKE '%"+sggName+"%'; ";
+      var sql = "SELECT * FROM pre_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY evPsName * 1; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
@@ -42,7 +42,7 @@ module.exports = function (app, conn) {
         }
       })
     }else {
-      var sql = "SELECT * FROM main_polls WHERE sgId LIKE '%"+sgId+"%' AND PsName LIKE '%"+sggName+"%'; ";
+      var sql = "SELECT * FROM main_polls WHERE sgId LIKE '%"+sgId+"%' AND address LIKE '%"+sggName+"%' ORDER BY PsName * 1; ";
 
       conn.query(stmt + sql, function (err, result) {
         if (err) {
