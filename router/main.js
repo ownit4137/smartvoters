@@ -102,10 +102,14 @@ module.exports = function (app, conn) {
   });
 
   app.get("/CandProm_do", function (req, res) {
-    var name = req.query.name;
+    var name = "'%"+req.query.name+"%'";
     var partyName = req.query.partyName;
 
-    var sql = "SELECT * FROM promise JOIN candidate ON promise.cnddtId=candidate.cnddtId WHERE candidate.name LIKE '%"+name+"%' AND candidate.partyName LIKE '%"+partyName+"%'; ";
+    if (name === undefined) {
+      name = '';
+    }
+
+    var sql = "SELECT * FROM promise JOIN candidate ON promise.cnddtId=candidate.cnddtId WHERE candidate.name LIKE "+name+" AND candidate.partyName LIKE '%"+partyName+"%'; ";
 
     conn.query(sql, function (err, result) {
       if (err) {

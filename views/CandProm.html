@@ -12,18 +12,6 @@
       function sidebar_close() {
         document.getElementById("sidebar-layout").style.display = "none";
       }
-
-      function alert_empty() {
-        var f = document.searchinput.name.value;
-
-        if (f == "") {
-          alert("후보자 이름을 입력해주세요");
-          document.searchinput.name.focus();
-          return;
-        }
-
-        document.searchinput.submit();
-      }
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="./src/readmore.min.js"></script>
@@ -97,7 +85,7 @@
                 
                 <input type="text" name="name" class="inputarea" placeholder="후보자 이름">
                 <input type="text" name="partyName" class="inputarea" placeholder="정당명">
-                <input type="submit" value="     " class="inputarea search-button" onclick="alert_empty();">
+                <input type="submit" value="     " class="inputarea search-button">
               </form>
             </div>
             
