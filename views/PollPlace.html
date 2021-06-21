@@ -117,7 +117,13 @@
                       var day = (data.sgId%10000)%100
                       var date = year.toString()+'년 '+month.toString()+'월 '+day.toString()+'일'
                     %>
-                  <div id="search-comment"><%=date%> 선거의 해당 투표소</div>
+                  <div id="search-comment">
+                    <% if(searchSgId != '') {%> 
+                    <%=date%> 선거의 해당 투표소
+                    <% }else { %> 
+                      '<%=searchKey%>' 검색 결과의 모든 투표소
+                    <% } %> 
+                  </div>
                   <table id="search-table">
                     <tr>
                       <th>투표소명</th>
@@ -134,6 +140,7 @@
                       var floor = data.floor;
                       var address = data.address;
                       var pollPlace = sdName+' '+wiwName+' '+emdName+' '+place+' '+floor;
+                      var searchAddress = address.split('(');
                     %> 
                     <tr>
                       <td>
@@ -144,7 +151,7 @@
                         <% } %>  
                       </td>
                       <td><%=pollPlace%></td>
-                      <td><%=address%></td>
+                      <td><a href="https://map.naver.com/v5/search/<%=searchAddress[0]%>/address" target="_blank"><%=address%></a></td>
                     </tr>
                     <% } %> 
                   </table>

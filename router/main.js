@@ -38,7 +38,13 @@ module.exports = function (app, conn) {
           var resultArray1 = Object.values(JSON.parse(JSON.stringify(result[0])));
           var resultArray2 = Object.values(JSON.parse(JSON.stringify(result[1])));
 
-          res.render("PollPlace.html", { pollList : resultArray2, codes : resultArray1, pollType:pollType });
+          res.render("PollPlace.html", { 
+            pollList : resultArray2, 
+            codes : resultArray1, 
+            pollType:pollType, 
+            searchSgId:sgId,
+            searchKey: sggName 
+          });
         }
       })
     }else {
@@ -51,7 +57,13 @@ module.exports = function (app, conn) {
           var resultArray1 = Object.values(JSON.parse(JSON.stringify(result[0])));
           var resultArray2 = Object.values(JSON.parse(JSON.stringify(result[1])));
 
-          res.render("PollPlace.html", { pollList : resultArray2, codes : resultArray1, pollType:pollType });
+          res.render("PollPlace.html", { 
+            pollList : resultArray2, 
+            codes : resultArray1, 
+            pollType:pollType, 
+            searchSgId:sgId,
+            searchKey: sggName
+          });
         }
       })
     }
@@ -90,8 +102,8 @@ module.exports = function (app, conn) {
       }else {
         var resultArray1 = Object.values(JSON.parse(JSON.stringify(result[0])));
         var resultArray2 = Object.values(JSON.parse(JSON.stringify(result[1])));
-
-        res.render("CandInfo.html", { codes : resultArray1, candList : resultArray2 })
+        
+        res.render("CandInfo.html", { codes : resultArray1, candList : resultArray2 , searchSgId:sgId, searchKey: sggName})
       }
     })
   })
