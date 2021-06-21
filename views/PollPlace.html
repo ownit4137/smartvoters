@@ -119,9 +119,17 @@
                     %>
                   <div id="search-comment">
                     <% if(searchSgId != '') {%> 
-                    <%=date%> 선거의 해당 투표소
-                    <% }else { %> 
-                      '<%=searchKey%>' 검색 결과의 모든 투표소
+                      <% if(pollType == 'pre') {%>
+                        <%=date%> 선거의 해당 사전 투표소
+                      <% }else { %> 
+                        <%=date%> 선거의 해당 본 투표소
+                      <%}%>
+                    <% }else { %>
+                      <% if(pollType == 'pre') {%>
+                        '<%=searchKey%>' 검색 결과의 모든 사전 투표소
+                      <% }else { %> 
+                        '<%=searchKey%>' 검색 결과의 모든 본 투표소
+                      <%}%>
                     <% } %> 
                   </div>
                   <table id="search-table">
