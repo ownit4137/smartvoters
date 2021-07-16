@@ -1,4 +1,4 @@
-# 알.쓸.선.잡 (알아두면 쓸모있는 선거 잡학사전)
+# 알쓸선잡
 
 ![npm ver](https://img.shields.io/badge/npm-7.13.0-01DF74)  ![express](https://img.shields.io/badge/express-4.17.1-088A68)  ![license](https://img.shields.io/badge/license-ISC-151515) 
 
